@@ -1,0 +1,59 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{vm.title}}</h3>
+</div>
+<div class="modal-body">
+	<form name="tarefaForm">
+		<div class="row">
+		  	<div class="form-group col-md-12">
+		    	<label for="tarefa-task">Task</label>
+		    	<input type="text" class="form-control" name="tarefa-task" data-ng-model="vm.task.task" 
+		    		  placeholder="" required="required" >
+		  	</div>
+		</div>
+		<div class="row">			
+			<div class="form-group col-md-4">
+				<label for="task-due-date">Due Date</label>				
+				<div class="input-group">
+					<input type="text" class="form-control" id="task-due-date" 
+						uib-datepicker-popup="yyyy-dd-MM" is-open="vm.calendarioAberto" datepicker-options="dateOptions"
+						data-ng-model="vm.task.dueDate" data-ng-required="true" 
+						placeholder="When the task ends?" />
+		          	<span class="input-group-btn">
+		            	<button type="button" class="btn btn-default" ng-click="vm.showCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
+		          	</span>
+	          	</div>
+			</div>	  
+			<div class="form-group col-md-4">
+		  		<label for="task-status">Status</label>
+		  		<select class="form-control" name="task-status" data-ng-model="vm.task.status" required="required"
+		  			data-ng-options="s.status for s in vm.statusList track by s.id">
+		  			<option value="" disabled>-- Select the status --</option>
+		  		</select>
+			</div>
+			<div class="form-group col-md-4">
+		   		<label for="tarefa-progress-concluida">Progress (%)</label>
+		    	<input type="number" class="form-control" id="tarefa-progress-concluida" 
+		    		    data-ng-model="vm.task.progress" 
+		    			min="0" max="100" placeholder="Progress of the task">
+		  	</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-12">
+		   		<label for="task-description">Description</label>
+		    	<textarea class="form-control" name="task-description" ng-model="vm.task.description" placeholder="Describe the task" rows="10" required="required">
+		    	</textarea>
+		  	</div>		
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-primary" ng-click="vm.saveTask(vm.task)" ng-disabled="tarefaForm.$invalid">
+		<i class="fa fa-floppy-o" aria-hidden="true"></i> Save
+	</button>
+	<button type="button" class="btn btn-warning" ng-click="vm.clearForm()">
+		<i class="fa fa-eraser" aria-hidden="true"></i> Clear
+	</button>
+	<button type="button" class="btn btn-danger" ng-click="vm.closeModal()" >
+		<i class="fa fa-undo" aria-hidden="true"></i> Cancel
+	</button>
+</div>

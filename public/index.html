@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html data-ng-app="todo-app">
+<head>
+	<title>Task List | MEAN</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<base href="/">
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      	<a class="navbar-brand" href="index.html">
+	        	<i class="fa fa-tasks" aria-hidden="true"></i>
+	        	 Task List | MEAN
+	        </a>	
+	    </div>
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="/task">Task <span class="sr-only">(current)</span></a></li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+
+    <main class="content">
+		<div data-ng-view></div>
+	</main>
+	
+	<!-- Libs -->
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular-route/angular-route.min.js"></script>
+	<script src="task/task.module.js"></script>
+	<script src="app.js"></script>
+	<script src="app.config.js"></script>
+	<script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+	<!-- Controllers -->
+	<script src="task/task-list.controller.js"></script>
+	<script src="task/task-edit.controller.js"></script>
+	<script src="task/task-delete.controller.js"></script>
+
+	<!-- Others -->
+	<script src="share/const.js"></script> 
+	<script src="task/task.service.js"></script>
+	
+</body>
+</html>

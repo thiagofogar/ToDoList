@@ -1,0 +1,69 @@
+<div class="page-header">
+  <h1>TODO List <small> tasks </small></h1>
+</div>
+<nav class="text-right">
+	<div class="row">
+		<div class="form-group col-md-4">
+			<input type="text" class="form-control" data-ng-model="search.task" placeholder="Search..." />
+		</div>
+		<div class="form-group col-md-4">
+			<select class="form-control" name="tarefa-status" data-ng-model="search.status">
+	  			<option value=""> All </option>
+	  			<option data-ng-repeat="s in vm.statusList" value="{{s.id}}"> {{s.status}}</option>
+	  		</select>
+		</div>
+		<div class="form-group col-md-4">
+			<button ng-click="vm.newTask()" class="btn btn-success"> 
+				<i class="fa fa-plus" aria-hidden="true"></i> New Task
+			</button>
+		</div>
+	</div>
+</nav>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th class="text-left" width="40%">Name</th>			
+			<th class="text-center" width="15%">Due Date</th>
+			<th class="text-center" width="15%">Status</th>
+			<th class="text-center" width="20%">Progress %</th>
+			<th width="1%"></th>
+			<th width="1%"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr data-ng-repeat="t in vm.taskList | filter:search:strict | orderBy:'t.dueDate':true" 
+			data-ng-if="vm.taskList.length">
+			<td>{{t.task | limitTo: 60}}</td>			
+			<td class="text-center">{{t.dueDate | date: "yyyy-dd-MM"}}</td>
+			<td class="text-center">{{ t.status == 1 ? 'Created' : t.status == 2 ? 'In Progress' : 'Completed'}}</td>
+			<td class="text-center">
+				<div class="progress">
+					<div ng-class="t.progress < 26 ? 'progress-bar-danger progress-bar-striped' : 
+								   t.progress < 51 ? 'progress-bar-info progress-bar-striped' :
+								   t.progress < 76 ? 'progress-bar-warning progress-bar-striped' : 'progress-bar-success progress-bar-striped'" 
+								   role="progressbar" 
+						aria-valuenow="{{t.progress}}" 
+						aria-valuemin="0" aria-valuemax="100" 
+						style="width: {{t.progress}}%;">
+			    		{{t.progress}}%
+			  		</div>
+				</div>
+			</td>
+			<td class="text-right">
+				<button type="button" data-ng-click="vm.editTask(t._id)" class="btn btn-primary btn-sm btn-xs">
+					<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+				</button>				
+			</td>
+			<td>
+				<button type="button" class="btn btn-danger btn-xs" data-ng-click="vm.deleteTask(t._id)">
+					<i class="fa fa-trash" aria-hidden="true"></i>
+				</button>	
+			</td>
+		</tr>
+		
+		<tr data-ng-if="!vm.taskList.length">
+			<td colspan="7">No tasks found!</td>
+		</tr>		
+	</tbody>
+</table>
